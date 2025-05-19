@@ -1,0 +1,16 @@
+[2025-05-19 14:04:03.376] [robot_logger] [info] Sensor 0: Distance
+[2025-05-19 14:04:03.376] [robot_logger] [info] Sensor 1: Gyroscope
+[2025-05-19 14:04:03.376] [robot_logger] [info] Sensor 2: Bumper
+[2025-05-19 14:04:03.376] [robot_logger] [info] Sensor 3: Cliff
+[2025-05-19 14:04:03.376] [robot_logger] [info] Started Thread Mapper
+[2025-05-19 14:04:03.376] [robot_logger] [info] Started Thread Mapper
+[2025-05-19 14:04:13.063] [robot_logger] [info] Calling run of StauRob
+[2025-05-19 14:04:13.063] [robot_logger] [info] Executing sensor polling
+[2025-05-19 14:04:13.063] [robot_logger] [info] Executing sensor polling
+[2025-05-19 14:04:13.064] [robot_logger] [info] Executing sensor polling
+[2025-05-19 14:04:13.064] [robot_logger] [info] Executing sensor polling
+[2025-05-19 14:04:41.849] [robot_logger] [info] Calling stop of StauRob
+[2025-05-19 14:04:41.849] [robot_logger] [info] Deleting sensor Distance
+[2025-05-19 14:04:41.849] [robot_logger] [info] Deleting sensor Gyroscope
+[2025-05-19 14:04:41.849] [robot_logger] [info] Deleting sensor Bumper
+[2025-05-19 14:04:41.849] [robot_logger] [info] Deleting sensor Cliff

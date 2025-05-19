@@ -1,0 +1,52 @@
+#include <iostream>
+#include <thread>
+#include <string>
+
+#include "C:\Users\artur.hirsch\Desktop\StauRob\include\core\StauRob.h"
+
+bool running = true;
+
+void commandListener(StauRob& robot) {
+    std::string command;
+
+    while (running) {
+        std::cout << "> ";
+        std::getline(std::cin, command);
+
+        if (command == "start") {
+            std::cout << "[Command] Starting robot...\n";
+            robot.run();  // Starts or resumes run logic
+        }
+        else if (command == "stop") {
+            std::cout << "[Command] Stopping robot...\n";
+            robot.stop();  // Should gracefully stop threads
+        }
+        else if (command == "exit") {
+            std::cout << "[Command] Exiting program...\n";
+            robot.stop();
+            running = false;
+        }
+        else if (command == "bumper") {
+            std::cout << "[Command] Setting BumperSensor...\n";
+            //TODO
+        }
+        else if (command == "cliff") {
+            std::cout << "[Command] Setting CliffSensor...\n";
+            //TODO
+        }
+        else {
+            std::cout << "[Error] Unknown command: " << command << "\n";
+        }
+    }
+}
+
+
+int main() {
+    StauRob robot;
+
+    std::thread inputThread(commandListener, std::ref(robot));
+
+    inputThread.join();  // Wait for input thread to finish
+
+    return 0;
+}

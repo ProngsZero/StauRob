@@ -1,0 +1,40 @@
+#include "C:\Users\artur.hirsch\Desktop\StauRob\include\core\StauRob.h"
+
+StauRob::StauRob()
+    : mapper(),
+      localizer(sensors), // Pass vector of raw pointers
+      motorControl()
+{
+    // Create sensors and add raw pointers to the vector
+    sensors.push_back(new ProximitySensor());
+    sensors.push_back(new BumperSensor());
+    sensors.push_back(new Gyroscope());
+    sensors.push_back(new CliffSensor());
+}
+
+StauRob::~StauRob() {
+    for (auto* sensor : sensors) {
+        delete sensor;
+    }
+}
+
+void StauRob::run() {
+    std::cout << "StauRob is starting...\n";
+
+    // Poll sensors
+    for (auto* sensor : sensors) {
+        sensor->read();
+    }
+
+    // Get current position from localizer
+    position = localizer.getPosition();
+
+    // Update map
+    mapper.setCell(position, "visited");
+
+    // Example movement
+    motorControl.moveForward(10.0);
+    motorControl.rotate(90.0);
+
+    std::cout << "Run complete.\n";
+}
