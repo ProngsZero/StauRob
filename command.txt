@@ -8,4 +8,30 @@ g++ main.cpp control/MotorControl.cpp control/StepperMotor.cpp core/StauRob.cpp 
 
 codesonar analyze StauRob -clean -no-services localhost:7340 g++ main.cpp control/MotorControl.cpp control/StepperMotor.cpp core/StauRob.cpp mapping/Localizer.cpp mapping/Mapper.cpp -std=c++20 -I"C:\Users\artur.hirsch\Desktop\StauRob\include" -I"C:\Users\artur.hirsch\Desktop\StauRob\spdlog\include" -L"C:\Users\artur.hirsch\Desktop\StauRob\spdlog\build"
 
-g++ main.cpp control/MotorControl.cpp control/StepperMotor.cpp core/StauRob.cpp mapping/Localizer.cpp mapping/Mapper.cpp -std=c++20 -I"C:\Users\artur.hirsch\Desktop\StauRob\include" -I"C:\Users\artur.hirsch\Desktop\StauRob\spdlog\include" -L"C:\Users\artur.hirsch\Desktop\StauRob\spdlog\build"
+g++ main.cpp control/MotorControl.cpp control/StepperMotor.cpp core/StauRob.cpp mapping/Localizer.cpp mapping/Mapper.cpp -std=c++20 -I"C:\Users\artur.hirsch\Desktop\StauRob\include" -I"C:\Users\artur.hirsch\Desktop\StauRob\include\spdlog" -L"C:\Users\artur.hirsch\Desktop\StauRob\lib"
+
+
+StauRob:
+-.git/*
+-.gitignore
+-commandline.txt
+-lib/libspdlog.a
+-src/main.cpp
+-src/control/MotorControl.cpp
+-src/control/StepperMotor.cpp
+-src/core/StauRob.cpp
+-src/mapping/Localizer.cpp
+-src/mapping/Mapper.cpp
+-include/control/MotorControl.h
+-include/control/StepperMotor.h
+-include/core/StauRob.h
+-include/mapping/Localizer.h
+-include/mapping/Mapper.h
+-include/sensors/ISensor.h
+-include/sensors/CliffSensor.h
+-include/sensors/BumperSensor.h
+-include/sensors/GyroscopeSensor.h
+-include/sensors/ProximitySensor.h
+-include/spdlog/* (this one contains a lot of headers needed for the spdlog lib)
+
+
