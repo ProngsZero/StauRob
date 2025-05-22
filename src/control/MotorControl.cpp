@@ -1,4 +1,4 @@
-#include "C:\Users\artur.hirsch\Desktop\StauRob\include\control\MotorControl.h"
+#include "control/MotorControl.h"
 
 MotorControl::MotorControl()
     : wheelRadius(0.03),    // 3 cm radius

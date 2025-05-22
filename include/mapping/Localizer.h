@@ -1,6 +1,8 @@
 #pragma once
-#include "C:\Users\artur.hirsch\Desktop\StauRob\include\sensors\ISensor.h"
+#include "sensors/ISensor.h"
+#include <Windows.h>
 #include <vector>
+#include <mutex>
 
 struct Pair {
     double x, y;
@@ -20,15 +22,23 @@ namespace std {
 
 struct Position {
     double x;
+    bool is_valid;
     double y;
+    short alorithmNumber;
     double orientation; // In degrees
 };
 
 class Localizer {
+private:
     std::vector<ISensor*> sensors;
     Position currentPos{0.0, 0.0, 0.0};
+    CRITICAL_SECTION* stateMutex;
+    CRITICAL_SECTION* updateMutex;
+    std::string* stateString;
 public:
-    Localizer(const std::vector<ISensor*>& sens) : sensors(sens) {}
+    Localizer(const std::vector<ISensor*>& sens, std::string* state, CRITICAL_SECTION* mutex, CRITICAL_SECTION* updateMutex) :
+        sensors(sens), stateMutex(mutex), stateString(state), updateMutex(updateMutex) {}
+
     
     void update();
     Pair getPosition() const;

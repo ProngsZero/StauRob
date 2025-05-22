@@ -1,4 +1,4 @@
-#include "C:\Users\artur.hirsch\Desktop\StauRob\include\control\StepperMotor.h"
+#include "control/StepperMotor.h"
 #define _USE_MATH_DEFINES
 #include <cmath> 
 

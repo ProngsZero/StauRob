@@ -1,4 +1,4 @@
-#include "C:\Users\artur.hirsch\Desktop\StauRob\include\control\StepperMotor.h"
+#include "control/StepperMotor.h"
 
 StepperMotor::StepperMotor(int stepsPerRevolution)
     : currentStep(0), stepsPerRevolution(stepsPerRevolution) {}

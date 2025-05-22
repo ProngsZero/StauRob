@@ -1,18 +1,16 @@
 #include <fstream>
 #include <sstream>
-#include "C:\Users\artur.hirsch\Desktop\StauRob\include\mapping\Mapper.h"
+#include "mapping/Mapper.h"
 
 void Mapper::setCell(Pair pair, const std::string& state) {
     map[pair] = state;
 }
 
 void Mapper::update() {
-    if (!localizer) return;
-
+    //if (!localizer) return;
     Pair pos = localizer->getPosition();
     setCell(pos, "visited");
 }
-
 
 // Simplified saving function
 void Mapper::save(const std::string& filename) {
