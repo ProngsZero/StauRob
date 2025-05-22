@@ -1,6 +1,7 @@
-#include "C:\Users\artur.hirsch\Desktop\StauRob\include\mapping\Localizer.h"
+#include "mapping/Localizer.h"
 
 void Localizer::update() {
+
     for (auto* sensor : sensors) {
         if (sensor->getType() == "Gyroscope") {
             currentPos.orientation += sensor->read().value;

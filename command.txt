@@ -2,10 +2,6 @@ g++ main.cpp control/MotorControl.cpp control/StepperMotor.cpp core/StauRob.cpp 
 
 
 
-
-
-
-
 codesonar analyze StauRob -clean -no-services localhost:7340 g++ main.cpp control/MotorControl.cpp control/StepperMotor.cpp core/StauRob.cpp mapping/Localizer.cpp mapping/Mapper.cpp -std=c++20 -I"C:\Users\artur.hirsch\Desktop\StauRob\include" -I"C:\Users\artur.hirsch\Desktop\StauRob\spdlog\include" -L"C:\Users\artur.hirsch\Desktop\StauRob\spdlog\build"
 
 g++ main.cpp control/MotorControl.cpp control/StepperMotor.cpp core/StauRob.cpp mapping/Localizer.cpp mapping/Mapper.cpp -std=c++20 -I"C:\Users\artur.hirsch\Desktop\StauRob\include" -I"C:\Users\artur.hirsch\Desktop\StauRob\include\spdlog" -L"C:\Users\artur.hirsch\Desktop\StauRob\lib"

@@ -1,33 +1,63 @@
 #pragma once
 #include <vector>
 #include <iostream>
-#include <thread>
+//#include <thread>
+#include <Windows.h>
 
+
+#include "control/MotorControl.h"
+#include "mapping/Localizer.h"
+#include "mapping/Mapper.h"
+#include "sensors/ISensor.h"
+#include "sensors/ProximitySensor.h"
+#include "sensors/BumperSensor.h"
+#include "sensors/GyroscopeSensor.h"
+#include "sensors/CliffSensor.h"
+
+#ifdef USELOG
 #include <spdlog/logger.h>
-#include "C:\Users\artur.hirsch\Desktop\StauRob\include\control\MotorControl.h"
-#include "C:\Users\artur.hirsch\Desktop\StauRob\include\mapping\Localizer.h"
-#include "C:\Users\artur.hirsch\Desktop\StauRob\include\mapping\Mapper.h"
-#include "C:\Users\artur.hirsch\Desktop\StauRob\include\sensors\ISensor.h"
-#include "C:\Users\artur.hirsch\Desktop\StauRob\include\sensors\ProximitySensor.h"
-#include "C:\Users\artur.hirsch\Desktop\StauRob\include\sensors\BumperSensor.h"
-#include "C:\Users\artur.hirsch\Desktop\StauRob\include\sensors\GyroscopeSensor.h"
-#include "C:\Users\artur.hirsch\Desktop\StauRob\include\sensors\CliffSensor.h"
+#define LOG_INFO(...) logger->info(__VA_ARGS__)
+#else
+#define LOG_INFO(...) // logging disabled
+#endif
 
 class StauRob {
+
+private:
     std::vector<ISensor*> sensors;
-    Mapper mapper;
-    Localizer localizer;
+    std::string state;
+    Mapper* mapper;
+    Localizer* localizer;
     MotorControl motorControl;
     Pair position;
-    std::thread mapperThread;
-    std::thread localizerThread;
+
+    DWORD threadIdMapper;
+    HANDLE hThreadMapper;
+
+    DWORD threadIdLocalizer;
+    HANDLE hThreadLocalizer;
+
+    #ifdef USELOG
     std::shared_ptr<spdlog::logger> logger;
-    bool running;
+    #endif
+    bool sr_running;
+    CRITICAL_SECTION stateMutex;
+    CRITICAL_SECTION updateMutex;
 
 public:
     void setValue(int index, bool value);
+    int cycles;
+    #ifdef USELOG
     StauRob(std::shared_ptr<spdlog::logger> logger);
+    #else
+    StauRob();
+    #endif
+
     ~StauRob();
     void run();
     void stop();
+    std::string getState();
+    void setState(std::string newState);
+    static DWORD WINAPI mapperThreadFunc(LPVOID lpParam);
+    static DWORD WINAPI localizerThreadFunc(LPVOID lpParam);
 };

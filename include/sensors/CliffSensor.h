@@ -1,5 +1,5 @@
 #pragma once
-#include "C:\Users\artur.hirsch\Desktop\StauRob\include\sensors\ISensor.h"
+#include "sensors/ISensor.h"
 
 class CliffSensor : public ISensor {
     bool cliff;
