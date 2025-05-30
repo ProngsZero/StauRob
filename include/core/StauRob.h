@@ -14,22 +14,20 @@
 #include "sensors/GyroscopeSensor.h"
 #include "sensors/CliffSensor.h"
 
-#ifdef USELOG
-#include <spdlog/logger.h>
-#define LOG_INFO(...) logger->info(__VA_ARGS__)
-#else
-#define LOG_INFO(...) // logging disabled
-#endif
+#define BUFFERSIZE 10
 
 class StauRob {
 
 private:
-    std::vector<ISensor*> sensors;
-    std::string state;
+    ISensor* sensorsArr[4];
+    char state[20];
     Mapper* mapper;
     Localizer* localizer;
-    MotorControl motorControl;
+    MotorControl* motorControl;
     Pair position;
+
+    SensorEvent events[BUFFERSIZE];
+    int bufferIndex;
 
     DWORD threadIdMapper;
     HANDLE hThreadMapper;
@@ -37,27 +35,25 @@ private:
     DWORD threadIdLocalizer;
     HANDLE hThreadLocalizer;
 
-    #ifdef USELOG
-    std::shared_ptr<spdlog::logger> logger;
-    #endif
     bool sr_running;
     CRITICAL_SECTION stateMutex;
     CRITICAL_SECTION updateMutex;
 
 public:
+    char name[20];
     void setValue(int index, bool value);
-    int cycles;
-    #ifdef USELOG
-    StauRob(std::shared_ptr<spdlog::logger> logger);
-    #else
-    StauRob();
-    #endif
-
+    StauRob(ISensor* sensorArr[], char* nameIn);
     ~StauRob();
-    void run();
+
+    void printStepsTaken();
+    void move(double distance);
+    void clearSteps();
+    void setName(const char* name);
+
+    void checkSensors();
     void stop();
-    std::string getState();
-    void setState(std::string newState);
+    char* getState();
+    void setState(const char* newState);
     static DWORD WINAPI mapperThreadFunc(LPVOID lpParam);
     static DWORD WINAPI localizerThreadFunc(LPVOID lpParam);
 };

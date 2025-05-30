@@ -1,10 +1,10 @@
 #pragma once
 #include "sensors/ISensor.h"
 
-class CliffSensor : public ISensor {
+class cliffSensor : public ISensor {
     bool cliff;
 public:
-    CliffSensor() : cliff(false) {};
+    cliffSensor() : cliff(false) {};
     SensorEvent read() override {
         return {"Cliff", cliff ? 1.0 : 0.0, currentTimeMillis()}; // 0 = safe, 1 = cliff detected
     }

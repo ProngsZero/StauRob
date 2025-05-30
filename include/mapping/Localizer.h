@@ -25,21 +25,19 @@ struct Position {
     bool is_valid;
     double y;
     short alorithmNumber;
-    double orientation; // In degrees
+    double orientation;
 };
 
 class Localizer {
 private:
-    std::vector<ISensor*> sensors;
+    ISensor* sensorArr[4];
     Position currentPos{0.0, 0.0, 0.0};
     CRITICAL_SECTION* stateMutex;
     CRITICAL_SECTION* updateMutex;
-    std::string* stateString;
+    char* stateString;
 public:
-    Localizer(const std::vector<ISensor*>& sens, std::string* state, CRITICAL_SECTION* mutex, CRITICAL_SECTION* updateMutex) :
-        sensors(sens), stateMutex(mutex), stateString(state), updateMutex(updateMutex) {}
+    Localizer(ISensor* senrs[], char* state, CRITICAL_SECTION* mutex, CRITICAL_SECTION* updateMutex);
 
-    
     void update();
     Pair getPosition() const;
     Position getOrientation() const;

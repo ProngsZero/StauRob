@@ -1,0 +1,175 @@
+{
+    "version": "2.1.0",
+    "$schema": "https://docs.oasis-open.org/sarif/sarif/v2.1.0/cs01/schemas/sarif-schema-2.1.0.json",
+    "runs": [
+        {
+            "tool": {
+                "driver": {
+                    "name": "codee",
+                    "fullName": "codee-2024.4.2-windows-amd64",
+                    "informationUri": "https://www.codee.com",
+                    "version": "2024.4.2",
+                    "semanticVersion": "2024.4.2",
+                    "rules": [
+                        {
+                            "id": "PWR010",
+                            "name": "Avoid misaligned struct definitions in C/C++",
+                            "defaultConfiguration": {
+                                "level": "warning"
+                            },
+                            "fullDescription": {
+                                "text": "In the C and C++ programming languages, improperly aligned struct members can cause inefficient memory access or even undefined behavior on some platforms. Structs should be defined to respect natural alignment rules and minimize padding where possible."
+                            },
+                            "helpUri": "https://github.com/codee-com/open-catalog/tree/main/Checks/PWR010"
+                        }
+                    ]
+                }
+            },
+            "invocations": [
+                {
+                    "commandLine": "codee checks --sarif -- 'g++' ./Alignment.cpp -O3",
+                    "startTimeUtc": "2025-05-20T15:45:57Z",
+                    "endTimeUtc": "2025-05-20T15:45:58Z",
+                    "executionSuccessful": true,
+                    "machine": "NB31",
+                    "account": "artur.hirsch"
+                }
+            ],
+            "originalUriBaseIds": {
+                "SRCROOT0": {
+                    "uri": "C:\\Users\\artur.hirsch\\Desktop\\StauRob\\StauRob\\include\\mapping\\"
+                }
+            },
+            "results": [
+                {
+                    "ruleId": "PWR010",
+                    "rank": 3,
+                    "message": {
+                        "text": "Avoid misaligned struct definitions in C/C++\n  Suggestion: Rearrange or align the members of the 'Position' structure to minimize padding and ensure proper alignment:\n\n struct Position { \n double x;\n double y;\n double orientation;\n short alorithmNumber;\n bool is_valid;\n};"
+                    },
+                    "locations": [
+                        {
+                            "physicalLocation": {
+                                "artifactLocation": {
+                                    "uri": "Localizer.h",
+                                    "uriBaseId": "SRCROOT0"
+                                },
+                                "region": {
+                                    "startLine": 23,
+                                    "startColumn": 1
+                                }
+                            }
+                        }
+                    ],
+                    "relatedLocations": [
+                        {
+                            "physicalLocation": {
+                                "artifactLocation": {
+                                    "uri": "Localizer.h",
+                                    "uriBaseId": "SRCROOT0"
+                                },
+                                "region": {
+                                    "startLine": 23,
+                                    "startColumn": 1
+                                }
+                            },
+                            "message": {
+                                "text": "Access"
+                            }
+                        },
+                        {
+                            "physicalLocation": {
+                                "artifactLocation": {
+                                    "uri": "Localizer.h",
+                                    "uriBaseId": "SRCROOT0"
+                                },
+                                "region": {
+                                    "startLine": 24,
+                                    "startColumn": 4
+                                }
+                            },
+                            "message": {
+                                "text": "Access"
+                            }
+                        },
+                        {
+                            "physicalLocation": {
+                                "artifactLocation": {
+                                    "uri": "Localizer.h",
+                                    "uriBaseId": "SRCROOT0"
+                                },
+                                "region": {
+                                    "startLine": 25,
+                                    "startColumn": 4
+                                }
+                            },
+                            "message": {
+                                "text": "Access"
+                            }
+                        },
+                        {
+                            "physicalLocation": {
+                                "artifactLocation": {
+                                    "uri": "Localizer.h",
+                                    "uriBaseId": "SRCROOT0"
+                                },
+                                "region": {
+                                    "startLine": 26,
+                                    "startColumn": 4
+                                }
+                            },
+                            "message": {
+                                "text": "Access"
+                            }
+                        },
+                        {
+                            "physicalLocation": {
+                                "artifactLocation": {
+                                    "uri": "Localizer.h",
+                                    "uriBaseId": "SRCROOT0"
+                                },
+                                "region": {
+                                    "startLine": 27,
+                                    "startColumn": 4
+                                }
+                            },
+                            "message": {
+                                "text": "Access"
+                            }
+                        },
+                        {
+                            "physicalLocation": {
+                                "artifactLocation": {
+                                    "uri": "Localizer.h",
+                                    "uriBaseId": "SRCROOT0"
+                                },
+                                "region": {
+                                    "startLine": 28,
+                                    "startColumn": 4
+                                }
+                            },
+                            "message": {
+                                "text": "Access"
+                            }
+                        },
+                        {
+                            "physicalLocation": {
+                                "artifactLocation": {
+                                    "uri": "Localizer.h",
+                                    "uriBaseId": "SRCROOT0"
+                                },
+                                "region": {
+                                    "startLine": 29,
+                                    "startColumn": 1
+                                }
+                            },
+                            "message": {
+                                "text": "Access"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

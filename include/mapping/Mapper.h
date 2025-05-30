@@ -2,27 +2,29 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <fstream>
+#include <sstream>
 
 #include "mapping/Localizer.h"
 
 class Mapper {
 private:
-    std::unordered_map<Pair, std::string> map;
     int mapId;
-    Localizer* localizer = nullptr;
+
+    std::unordered_map<Pair, std::string> map;
+
+    Localizer* localizer;
     CRITICAL_SECTION* stateMutex;
     CRITICAL_SECTION* updateMutex;
-    std::string* stateString;
-    //TODO event queue
+    char* stateString;
 
 public:
-    Mapper(Localizer* loc, std::string* state, CRITICAL_SECTION* mutex, CRITICAL_SECTION* updateMutex) :
-        localizer(loc), stateMutex(mutex), stateString(state), updateMutex(updateMutex) {}
+    Mapper(Localizer* loc, char* state, CRITICAL_SECTION* mutex, CRITICAL_SECTION* updateMutex);
     void setCell(Pair pair, const std::string& state);
 
     void save(const std::string& filename);
     void load(const std::string& filename);
 
     std::vector<Pair> calculatePath(const Pair& start, const Pair& end);
-    void update(); //TODO, read event queue
+    void update();
 };

@@ -1,20 +1,53 @@
+#pragma once
 #include "control/StepperMotor.h"
 
+int totalSteps = 0;
+
+
 StepperMotor::StepperMotor(int stepsPerRevolution)
-    : currentStep(0), stepsPerRevolution(stepsPerRevolution) {}
+    : forwardSteps(0), backwardSteps(0), active(true), stepsPerRevolution(stepsPerRevolution) {}
 
-void StepperMotor::stepForward(int steps) {
-    currentStep += steps;
+DWORD WINAPI StepperMotor::update(LPVOID lpParam)
+{
+    StepperMotor* motor = static_cast<StepperMotor*>(lpParam);
+    while (motor->active)
+    {
+        if (motor->forwardSteps > 0)
+        {
+            motor->forwardSteps--;
+            totalSteps++;
+        }
+        if (motor->backwardSteps > 0)
+        {
+            motor->backwardSteps--;
+            totalSteps++;
+        }
+    }
+    return 0;
 }
 
-void StepperMotor::stepBackward(int steps) {
-    currentStep -= steps;
+void StepperMotor::stepForward(int steps) 
+{
+    forwardSteps += steps;
 }
 
-void StepperMotor::reset() {
-    currentStep = 0;
+void StepperMotor::stepBackward(int steps) 
+{
+    backwardSteps -= steps;
 }
 
-int StepperMotor::getCurrentStep() const {
-    return currentStep;
+void StepperMotor::reset() 
+{
+    backwardSteps = 0;
+    forwardSteps = 0;
+}
+
+void StepperMotor::setActive()
+{
+    active = true;
+}
+
+void StepperMotor::setInactive()
+{
+    active = false;
 }

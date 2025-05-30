@@ -1,19 +1,31 @@
 #include "mapping/Localizer.h"
 
-void Localizer::update() {
+Localizer::Localizer(ISensor* senrs[], char* state, CRITICAL_SECTION* mutex, CRITICAL_SECTION* updateMutex)
+{
+    memcpy(&sensorArr, &senrs, 4);
+    this->stateString = state;
+    this->updateMutex = updateMutex;
+    this->stateMutex = mutex;
+}
 
-    for (auto* sensor : sensors) {
-        if (sensor->getType() == "Gyroscope") {
+void Localizer::update()
+{
+    for (auto* sensor : sensorArr)
+    {
+        if (sensor->getType() == "Gyroscope")
+        {
             currentPos.orientation += sensor->read().value;
         }
         // Optionally handle more sensors for x/y movement
     }
 }
 
-Position Localizer::getOrientation() const {
+Position Localizer::getOrientation() const 
+{
     return currentPos;
 }
 
-Pair Localizer::getPosition() const {
+Pair Localizer::getPosition() const 
+{
     return Pair(currentPos.x, currentPos.y); 
 }
