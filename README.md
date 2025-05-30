@@ -12,5 +12,5 @@ This is an example Project developed for Verifysoft Technology GmbH. The goal is
 - `Naming Style violation:` CliffSensor.h -> Class name not aligned with input naming style
 - `Nullpointer dereference:` StauRob.cpp -> StauRob::StauRob()
 - `Potential free of nullpointer:` main.cpp -> main()
-- `Faulty Third Party Software with entries in the CVE database:` A wrapper lib StaticLib1 uses OpenSSL version 3.0.7. Currently there is no function of this wrapper in use.
+
 
